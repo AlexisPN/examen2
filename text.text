@@ -1,0 +1,4 @@
+ python -m pip install Django    
+ pip install djangorestframework               
+python3 manage.py startapp api  
+python3 manage.py createproject ToDo .        
