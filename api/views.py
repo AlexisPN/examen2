@@ -12,11 +12,14 @@ from .serializers import (
     ListPendingTodosWithUserSerializer,
 )
 
-class ListTodosAPIView(APIView):
-    def get(self, request):
-        todos = Todo.objects.all()
-        serializer = TodoSerializer(todos, many=True)
-        return Response(serializer.data)
+class ListTodosAPIView(generics.ListCreateAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+       
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset().values_list('id', flat=True)
+        id_list = [{'id': id} for id in queryset]
+        return Response(id_list)
 
 class ListTodosWithTitleAPIView(APIView):
     def get(self, request):

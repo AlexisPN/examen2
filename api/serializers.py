@@ -15,7 +15,8 @@ from rest_framework import serializers
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ['id']
+        fields = ['id', 'title', 'description', 'status', 'user_id', 'created_at', 'updated_at', 'user']
+        read_only_fields = ['created_at', 'updated_at', 'user_id']
 
 class ListTodosWithTitleSerializer(serializers.ModelSerializer):
         class Meta:
